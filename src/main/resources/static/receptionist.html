@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WaitWise Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+        <h2>WaitWise</h2>
+        <button onclick="toggleDarkMode()">Dark Mode</button>
+    </div>
+
+    <div class="main">
+
+        <h1>Receptionist Dashboard</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Add Patient</h3>
+                <input type="text" id="name" placeholder="Patient Name">
+
+                <label>
+                    <input type="checkbox" id="emergency">
+                    Emergency
+                </label>
+
+                <button onclick="addPatient()">Add</button>
+            </div>
+
+            <div class="card">
+                <h3>Call Next</h3>
+                <button onclick="callNext()">Call</button>
+            </div>
+
+            <div class="card">
+                <h3>Average Time</h3>
+                <input type="number" id="avg" placeholder="Minutes">
+                <button onclick="setAvg()">Set</button>
+            </div>
+
+        </div>
+
+        <div class="queue-box">
+            <h2>Current Queue</h2>
+            <table id="patientTable"></table>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

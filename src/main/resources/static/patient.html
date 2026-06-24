@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WaitWise Patient View</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<div class="patient-page">
+   
+
+    <div class="patient-card">
+
+        <h3>Current Patient: <span id="patientName"></span></h3>
+        <h3>Current Token: <span id="currentToken"></span></h3>
+
+        <h3>Next Patient: <span id="nextPatient"></span></h3>
+        <h3>Next Token: <span id="nextToken"></span></h3>
+
+        <p>Queue Ahead: <span id="ahead"></span></p>
+        <p>Estimated Wait (Next Token): <span id="wait"></span> mins</p>
+    </div>
+
+    <audio id="bell" src="bell.mp3"></audio>
+
+</div>
+
+<script>
+let lastToken = 0;
+
+setInterval(async function () {
+
+    // Current patient
+    let currentRes = await fetch('/api/current-patient');
+    let currentPatient = await currentRes.json();
+
+    // All patients
+    let allRes = await fetch('/api/patients');
+    let patients = await allRes.json();
+
+    // Average time
+    let avgRes = await fetch('/api/avg');
+    let avgTime = await avgRes.text();
+
+    if (currentPatient) {
+        document.getElementById("currentToken").innerText = "#" + currentPatient.token;
+        document.getElementById("patientName").innerText = currentPatient.name;
+
+        if (currentPatient.token != lastToken) {
+            document.getElementById("bell").play();
+            lastToken = currentPatient.token;
+        }
+    }
+
+    let waitingPatients = patients.filter(p => p.status === "WAITING");
+
+    if (waitingPatients.length > 0) {
+        document.getElementById("nextPatient").innerText = waitingPatients[0].name;
+        document.getElementById("nextToken").innerText = "#" + waitingPatients[0].token;
+
+        // patients after next patient
+        document.getElementById("ahead").innerText = waitingPatients.length - 1;
+    } else {
+        document.getElementById("nextPatient").innerText = "-";
+        document.getElementById("nextToken").innerText = "-";
+        document.getElementById("ahead").innerText = "0";
+    }
+
+    // Live avg time
+    document.getElementById("wait").innerText = avgTime;
+
+}, 1000);
+</script>
+
+</body>
+</html>

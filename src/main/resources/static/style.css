@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #edf7ff, #f6fbff);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Background floating circles */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.15;
+}
+
+body::before {
+    width: 250px;
+    height: 250px;
+    background: #00b894;
+    top: 30px;
+    right: 80px;
+}
+
+body::after {
+    width: 180px;
+    height: 180px;
+    background: #0984e3;
+    bottom: 40px;
+    left: 50px;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #0f3d5e, #155d7a);
+    color: white;
+    padding: 30px;
+    min-height: 100vh;
+    box-shadow: 8px 0px 30px rgba(0,0,0,0.15);
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+/* Main */
+.main {
+    flex: 1;
+    padding: 40px;
+}
+
+.main h1 {
+    margin-bottom: 30px;
+    color: #0f3d5e;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 25px;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #00b894, #00cec9);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.04);
+}
+
+/* Queue table */
+.queue-box {
+    margin-top: 30px;
+    background: rgba(255,255,255,0.8);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 18px;
+    text-align: center;
+}
+
+tr {
+    transition: 0.3s;
+}
+
+tr:hover {
+    background: #f2fbff;
+}
+
+/* Patient page */
+.patient-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #eef8ff, #f7fcff);
+}
+
+.patient-card {
+    width: 480px;
+    background: rgba(255,255,255,0.85);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0px 20px 40px rgba(0,0,0,0.08);
+    animation: float 3s ease-in-out infinite;
+}
+
+.patient-card h3 {
+    margin: 18px 0;
+    color: #0f3d5e;
+}
+
+.patient-card p {
+    margin: 12px 0;
+    font-size: 18px;
+}
+
+/* Animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Dark mode */
+.dark {
+    background: #121212;
+    color: white;
+}
+
+.dark .card,
+.dark .queue-box,
+.dark .patient-card {
+    background: #1f1f1f;
+    color: white;
+}
